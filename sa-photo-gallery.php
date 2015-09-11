@@ -52,7 +52,7 @@ function pgsa_create_posttype() {
 add_action( 'init', 'pgsa_create_posttype' );
 
 // Add Custom css to Admin Área
-function pgsa_custom_admin_css($hook) {
+function pgsa_custom_admin_css($hook) { 
 	if( get_post_type() == 'photo-gallery' ) {
 	    wp_enqueue_style( 'photo_gallery_styles', plugin_dir_url( __FILE__ ) . 'css/admin-styles.css' );
 	}
