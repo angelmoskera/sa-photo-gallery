@@ -5,6 +5,11 @@
 	
 }
 
+.lity-image img{
+  width: 600px; 
+}
+
+
 /* Bootstrap Modal*/
 .fade {
   opacity: 0;
