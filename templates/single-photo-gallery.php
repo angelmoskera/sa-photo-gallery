@@ -1,5 +1,7 @@
 <?php
 
+//Force the use of the Full Width Template in Genesis themes
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'pgsa_custom_single_loop' );
