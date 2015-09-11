@@ -1,12 +1,11 @@
 <?php
-/**
- * Plugin Name: Photo Gallery SA
- * Description: A Photo Gallery dedicated for patients upload.
- * Version: 1.0.0
- * Author: Angel Yarmas
- * License: GPL2
+/*
+ Plugin Name: Photo Gallery SA
+ Plugin URI: http://www.surgeonsadvisor.com/
+ Description: Medical Photo Gallery that groups patients with their related procedures.
+ Author: Angel Yarmas
+ Version: 1.0
  */
-
 
 // Create Photo gallery
 function pgsa_create_posttype() {
