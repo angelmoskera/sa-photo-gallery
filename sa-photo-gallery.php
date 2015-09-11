@@ -132,7 +132,7 @@ function pgsa_patient_photos() {
 	        'view7' => __( 'Lower Back', 'cmb' ),
 	    ),
 	    
-	    'row_classes' => 'col-md-6',
+	    'row_classes' => 'col-md-6 pgsa-select-view',
 	) );
 
 	$cmb_group->add_group_field( $group_field_id, array(

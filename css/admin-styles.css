@@ -1,9 +1,15 @@
 /***************************************************************
 	CUSTOM STYLES FOR ADMIN AREA
 ***************************************************************/
-.cmb2-id--pgsa-photos-patient-photos-0--pgsa-photos-view-select{
+.pgsa-select-view{
 	padding-right: 50% !important;
 }
+
+.pgsa-select-view select{
+  width: 100%;
+  max-width: 349.5px; 
+}
+
 
 input.cmb2-upload-button.button {
     display: inline-block;
@@ -36,10 +42,7 @@ input.cmb2-upload-button.button {
 	width: 100%;
 }
 
-#cmb2-metabox-_pgsa_photos_metabox .cmb2-id--pgsa-photos-patient-photos-0--pgsa-photos-view-select select{
-	width: 100%;
-	max-width: 349.5px
-}
+
 
 
 @media (min-width: 992px) {
