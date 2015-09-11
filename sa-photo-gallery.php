@@ -52,12 +52,12 @@ function pgsa_create_posttype() {
 add_action( 'init', 'pgsa_create_posttype' );
 
 // Add Custom css to Admin Área
-function my_enqueue($hook) {
+function pgsa_custom_admin_css($hook) {
 	if( get_post_type() == 'photo-gallery' ) {
-	    wp_enqueue_style( 'photo_gallery_styles', plugin_dir_url( __FILE__ ) . 'css/styles.css' );
+	    wp_enqueue_style( 'photo_gallery_styles', plugin_dir_url( __FILE__ ) . 'css/admin-styles.css' );
 	}
 }
-add_action( 'admin_enqueue_scripts', 'my_enqueue' );
+add_action( 'admin_enqueue_scripts', 'pgsa_custom_admin_css' );
 
 
 // Force use of template
@@ -162,9 +162,6 @@ function pgsa_patient_photos() {
 		'row_classes' => 'col-md-6',
 	) );
 }
-
-
-
 
 
 //PATIEN INFO METABOXES
