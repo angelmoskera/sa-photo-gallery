@@ -19,6 +19,7 @@ function pgsa_create_posttype() {
 				'name' 			=> __( 'Photo Gallery' ),
 				'singular_name' => __( 'Photo Gallery' ),
 				'all_items'     => __( 'All Patients' ),
+				'name_admin_bar'=> __( 'Patient' ),
 			),
 			'public' 			=> true, 
 			'has_archive' 		=> true,
@@ -49,6 +50,14 @@ function pgsa_create_posttype() {
 }
 
 add_action( 'init', 'pgsa_create_posttype' );
+
+// Add Custom css to Admin Área
+function my_enqueue($hook) {
+	if( get_post_type() == 'photo-gallery' ) {
+	    wp_enqueue_style( 'photo_gallery_styles', plugin_dir_url( __FILE__ ) . 'css/styles.css' );
+	}
+}
+add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 
 
 // Force use of template
@@ -91,7 +100,7 @@ function pgsa_patient_photos() {
 	) );
 	// $group_field_id is the field id string, so in this case: $prefixphotos . 'demo'
 	$group_field_id = $cmb_group->add_field( array(
-		'id'          => $prefixphotos . 'demo',
+		'id'          => $prefixphotos . 'patient-photos',
 		'type'        => 'group',
 		'options'     => array(
 			'group_title'   => __( 'Group {#}', 'cmb2' ), // {#} gets replaced by row number
@@ -100,6 +109,7 @@ function pgsa_patient_photos() {
 			'sortable'      => true, // beta
 			// 'closed'     => true, // true to have the groups closed by default
 		),
+		'row_classes' => 'row',
 	) );
 	/**
 	 * Group fields works the same, except ids only need
@@ -121,29 +131,35 @@ function pgsa_patient_photos() {
 	        'view6' => __( 'Upper Back', 'cmb' ),
 	        'view7' => __( 'Lower Back', 'cmb' ),
 	    ),
+	    
+	    'row_classes' => 'col-md-6',
 	) );
 
 	$cmb_group->add_group_field( $group_field_id, array(
 		'name' => __( 'Before photo', 'cmb2' ),
 		'id'   => $prefixphotos . 'before_photo',
 		'type' => 'file',
+		'row_classes' => 'col-md-6',
 	) );
 	$cmb_group->add_group_field( $group_field_id, array(
 		'name' => __( 'After photo', 'cmb2' ),
 		'id'   => $prefixphotos . 'after_photo',
 		'type' => 'file',
+		'row_classes' => 'col-md-6',
 	) );
 	$cmb_group->add_group_field( $group_field_id, array(
 		'name' => __( 'Before Caption', 'cmb2' ),
-		'id'   => 'before_caption',
-		'desc' => $prefixphotos . 'This text will go <b>AFTER</b> the text "Before"',
+		'id'   => $prefixphotos . 'before_caption',
+		'desc' => 'This text will go <b>AFTER</b> the text "Before"',
 		'type' => 'text',
+		'row_classes' => 'col-md-6',
 	) );
 	$cmb_group->add_group_field( $group_field_id, array(
 		'name' => __( 'After Caption', 'cmb2' ),
-		'id'   => 'after_caption',
-		'desc' => $prefixphotos . 'This text will go <b>AFTER</b> the text "After"',
+		'id'   => $prefixphotos . 'after_caption',
+		'desc' => 'This text will go <b>AFTER</b> the text "After"',
 		'type' => 'text',
+		'row_classes' => 'col-md-6',
 	) );
 }
 
@@ -153,27 +169,22 @@ function pgsa_patient_photos() {
 
 //PATIEN INFO METABOXES
 add_action( 'cmb2_init', 'cmb2_sample_metaboxes' );
-/**
- * Define the metabox and field configurations.
- */
+/* Define the metabox and field configurations. */
 function cmb2_sample_metaboxes() {
 
     // Start with an underscore to hide fields from custom fields list
     $prefixinfo = '_pgsa_info_';
 
-    /**
-     * Initiate the metabox
-     */
+    /* Initiate the metabox */
     $cmb = new_cmb2_box( array(
-        'id'            => 'test_metabox',
+        'id'            => $prefixinfo . 'patient-info',
         'title'         => __( 'Patient info', 'cmb2' ),
         'object_types'  => array( 'photo-gallery', ), // Post type
         'context'       => 'normal',
         'priority'      => 'high',
         'show_names'    => true,
-
+        'row_classes' => 'row',
     ) );
-
 
     // Age Metabox
     $cmb->add_field( array(
@@ -182,12 +193,13 @@ function cmb2_sample_metaboxes() {
         'id'         => $prefixinfo . 'age',
         'type'       => 'text',
         'show_on_cb' => 'cmb2_hide_if_no_cats', 
+        'row_classes' => 'col-md-4',
     ) );
 
     // Gender Metabox
     $cmb->add_field( array(
     'name'             => 'Gender',
-    'desc'             => 'Select an option',
+    'desc'             => 'Select the patient gender',
     'id'               => $prefixinfo . 'gender_select',
     'type'             => 'select',
     'show_option_none' => true,
@@ -195,12 +207,13 @@ function cmb2_sample_metaboxes() {
         'female' => __( 'Female', 'cmb' ),
         'male'   => __( 'Male', 'cmb' ),
 	    ),
+    'row_classes' => 'col-md-4',
 	) );
 
     // Ethnicity Metabox
 	$cmb->add_field( array(
     'name'             => 'Ethnicity',
-    'desc'             => 'Select an option',
+    'desc'             => 'Select the patient ethnicity',
     'id'               => $prefixinfo . 'ethnicity_select',
     'type'             => 'select',
     'show_option_none' => true,
@@ -209,6 +222,7 @@ function cmb2_sample_metaboxes() {
         'african'   => __( 'African american', 'cmb' ),    
         'asian'   	=> __( 'Asian', 'cmb' ),
 	    ),
+    'row_classes' => 'col-md-4',
 	) );
 
     // Height Metabox
@@ -218,6 +232,7 @@ function cmb2_sample_metaboxes() {
         'id'         => $prefixinfo . 'height',
         'type'       => 'text',
         'show_on_cb' => 'cmb2_hide_if_no_cats', 
+        'row_classes'=> 'col-md-4',
     ) );
 
     // Weight Metabox
@@ -227,15 +242,16 @@ function cmb2_sample_metaboxes() {
         'id'         => $prefixinfo . 'weight',
         'type'       => 'text',
         'show_on_cb' => 'cmb2_hide_if_no_cats', 
+        'row_classes'=> 'col-md-4',
     ) );
-
 
     // Procedures Detail Metabox
 	$cmb->add_field( array(
     'name'    => 'Procedure detail',
     'desc'    => 'Procedure detail for the patient if exists',
     'id'      => $prefixinfo . 'procedure_detail',
-    'type' => 'textarea_small'
+    'type' 	  => 'textarea_small',
+    'row_classes' => 'col-md-12',
 	) );
 }
 
