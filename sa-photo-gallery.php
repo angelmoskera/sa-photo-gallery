@@ -83,86 +83,6 @@ function include_pgsa_template( $template_path ){
 }
 
 
-
-//PATIENT PHOTOS METABOXES
-add_action( 'cmb2_init', 'pgsa_patient_photos' );
-function pgsa_patient_photos() {
-	// Start with an underscore to hide fields from custom fields list
-	$prefixphotos = '_pgsa_photos_';
-	/**
-	 * Repeatable Field Groups
-	 */
-	$cmb_group = new_cmb2_box( array(
-		'id'           => $prefixphotos . 'metabox',
-		'title'        => __( 'Patient photos', 'cmb2' ),
-		'object_types' => array( 'photo-gallery', ),
-	) );
-	// $group_field_id is the field id string, so in this case: $prefixphotos . 'demo'
-	$group_field_id = $cmb_group->add_field( array(
-		'id'          => $prefixphotos . 'patient-photos',
-		'type'        => 'group',
-		'options'     => array(
-			'group_title'   => __( 'Group {#}', 'cmb2' ), // {#} gets replaced by row number
-			'add_button'    => __( 'Add another group', 'cmb2' ),
-			'remove_button' => __( 'Remove group', 'cmb2' ),
-			'sortable'      => true, // beta
-			// 'closed'     => true, // true to have the groups closed by default
-		),
-		'row_classes' => 'row',
-	) );
-	/**
-	 * Group fields works the same, except ids only need
-	 * to be unique to the group. Prefixphotos is not needed.
-	 *
-	 * The parent field's id needs to be passed as the first argument.
-	 */
-	$cmb_group->add_group_field( $group_field_id, array(
-	    'name'             => 'Select View',
-	    'id'               => $prefixphotos . 'view_select',
-	    'type'             => 'select',
-	    'show_option_none' => true,
-	    'options'          => array(
-	        'view1' => __( 'Frontal', 'cmb' ),
-	        'view2' => __( 'Lateral Right', 'cmb' ),
-	        'view3' => __( 'Lateral Left', 'cmb' ),
-	        'view4' => __( 'Oblique Right', 'cmb' ),
-	        'view5' => __( 'Oblique Left', 'cmb' ),
-	        'view6' => __( 'Upper Back', 'cmb' ),
-	        'view7' => __( 'Lower Back', 'cmb' ),
-	    ),
-	    
-	    'row_classes' => 'col-md-6 pgsa-select-view',
-	) );
-
-	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'Before photo', 'cmb2' ),
-		'id'   => $prefixphotos . 'before_photo',
-		'type' => 'file',
-		'row_classes' => 'col-md-6',
-	) );
-	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'After photo', 'cmb2' ),
-		'id'   => $prefixphotos . 'after_photo',
-		'type' => 'file',
-		'row_classes' => 'col-md-6',
-	) );
-	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'Before Caption', 'cmb2' ),
-		'id'   => $prefixphotos . 'before_caption',
-		'desc' => 'This text will go <b>AFTER</b> the text "Before"',
-		'type' => 'text',
-		'row_classes' => 'col-md-6',
-	) );
-	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'After Caption', 'cmb2' ),
-		'id'   => $prefixphotos . 'after_caption',
-		'desc' => 'This text will go <b>AFTER</b> the text "After"',
-		'type' => 'text',
-		'row_classes' => 'col-md-6',
-	) );
-}
-
-
 //PATIEN INFO METABOXES
 add_action( 'cmb2_init', 'cmb2_sample_metaboxes' );
 /* Define the metabox and field configurations. */
@@ -250,6 +170,95 @@ function cmb2_sample_metaboxes() {
     'row_classes' => 'col-md-12',
 	) );
 }
+
+
+//PATIENT PHOTOS METABOXES
+add_action( 'cmb2_init', 'pgsa_patient_photos' );
+function pgsa_patient_photos() {
+	// Start with an underscore to hide fields from custom fields list
+	$prefixphotos = '_pgsa_photos_';
+	/**
+	 * Repeatable Field Groups
+	 */
+	$cmb_group = new_cmb2_box( array(
+		'id'           => $prefixphotos . 'metabox',
+		'title'        => __( 'Patient photos', 'cmb2' ),
+		'object_types' => array( 'photo-gallery', ),
+	) );
+	// $group_field_id is the field id string, so in this case: $prefixphotos . 'demo'
+	$group_field_id = $cmb_group->add_field( array(
+		'id'          => $prefixphotos . 'patient-photos',
+		'type'        => 'group',
+		'options'     => array(
+			'group_title'   => __( 'Group {#}', 'cmb2' ), // {#} gets replaced by row number
+			'add_button'    => __( 'Add another group', 'cmb2' ),
+			'remove_button' => __( 'Remove group', 'cmb2' ),
+			'sortable'      => true, // beta
+			// 'closed'     => true, // true to have the groups closed by default
+		),
+		'row_classes' => 'row',
+	) );
+	/**
+	 * Group fields works the same, except ids only need
+	 * to be unique to the group. Prefixphotos is not needed.
+	 *
+	 * The parent field's id needs to be passed as the first argument.
+	 */
+	$cmb_group->add_group_field( $group_field_id, array(
+	    'name'             => 'Select View',
+	    'id'               => $prefixphotos . 'view_select',
+	    'type'             => 'select',
+	    'show_option_none' => true,
+	    'options'          => array(
+	        'view1' => __( 'Frontal', 'cmb' ),
+	        'view2' => __( 'Lateral Right', 'cmb' ),
+	        'view3' => __( 'Lateral Left', 'cmb' ),
+	        'view4' => __( 'Oblique Right', 'cmb' ),
+	        'view5' => __( 'Oblique Left', 'cmb' ),
+	        'view6' => __( 'Upper Back', 'cmb' ),
+	        'view7' => __( 'Lower Back', 'cmb' ),
+	    ),
+	    'attributes'  => array(
+        'required'    => 'required',
+    	),
+	    
+	    'row_classes' => 'col-md-6 pgsa-select-view',
+	) );
+
+	$cmb_group->add_group_field( $group_field_id, array(
+		'name' => __( 'Before photo', 'cmb2' ),
+		'id'   => $prefixphotos . 'before_photo',
+		'type' => 'file',
+		'row_classes' => 'col-md-6',
+	    'attributes'  => array(
+        'required'    => 'required',
+    	),
+	) );
+	$cmb_group->add_group_field( $group_field_id, array(
+		'name' => __( 'After photo', 'cmb2' ),
+		'id'   => $prefixphotos . 'after_photo',
+		'type' => 'file',
+		'row_classes' => 'col-md-6',
+	    'attributes'  => array(
+        'required'    => 'required',
+    	),
+	) );
+	$cmb_group->add_group_field( $group_field_id, array(
+		'name' => __( 'Before Caption', 'cmb2' ),
+		'id'   => $prefixphotos . 'before_caption',
+		'desc' => 'This text will go <b>AFTER</b> the text "Before"',
+		'type' => 'text',
+		'row_classes' => 'col-md-6',
+	) );
+	$cmb_group->add_group_field( $group_field_id, array(
+		'name' => __( 'After Caption', 'cmb2' ),
+		'id'   => $prefixphotos . 'after_caption',
+		'desc' => 'This text will go <b>AFTER</b> the text "After"',
+		'type' => 'text',
+		'row_classes' => 'col-md-6',
+	) );
+}
+
 
 
 
