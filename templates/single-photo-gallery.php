@@ -2,6 +2,7 @@
 
 //Force the use of the Full Width Template in Genesis themes
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+add_action( 'genesis_after_entry_content', 'genesis_prev_next_post_nav', 5 );
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'pgsa_custom_single_loop' );
@@ -19,17 +20,18 @@ function pgsa_custom_single_loop() { ?>
 	// Echo the metadata
 	?>
 
+	<?php previous_post('&laquo;&laquo; %', 'Previous Patient ', 'no'); ?> | <?php next_post('% &raquo;&raquo; ', 'Next Patient ', 'no'); ?>
 	<article <?php post_class() ?> >
 		<h1><?php the_title(); ?></h1>
 		<?php foreach ( $patient_photos as $value ) { ?>
 
 			<div class="one-half first">							
 				<a href="<?php echo $value['_pgsa_photos_before_photo']; ?>"  data-lity><img src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
-				<p>Before <?php echo $value['_pgsa_photos_before_caption']; ?></p>
+				<p><strong>Before</strong><?php if (!empty($value['_pgsa_photos_before_caption'])) { ?>: <?php echo $value['_pgsa_photos_before_caption']; ?><?php } ?></p>
 			</div>
 			<div class="one-half">								
 				<a href="<?php echo $value['_pgsa_photos_after_photo']; ?>"   data-lity><img src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a>
-				<p>After <?php echo $value['_pgsa_photos_after_caption']; ?></p>
+				<p><strong>After</strong><?php if (!empty($value['_pgsa_photos_after_photo'])) { ?>: <?php echo $value['_pgsa_photos_after_caption']; ?><?php } ?></p>
 			</div>
 		<?php } ?>
 
@@ -37,20 +39,23 @@ function pgsa_custom_single_loop() { ?>
 		<section class="pgsa-patient-info">
  			<div class="one-half first">
 	 			<ul>
-	 				<li>Age: <?php echo esc_html( $age ); ?></li>
-	 				<li>Gender: <?php echo esc_html( $gender ); ?></li>
-	 				<li>Ethnicity: <?php echo esc_html( $ethnic ); ?></li>
+	 				<?php if (!empty($age)) { ?><li><strong>Age:</strong> <?php echo esc_html( $age ); ?></li><?php } ?>
+	 				<?php if (!empty($gender)) { ?><li><strong>Gender:</strong> <?php echo esc_html( $gender ); ?></li><?php } ?>
+	 				<?php if (!empty($ethnic)) { ?><li><strong>Ethnicity:</strong> <?php echo esc_html( $ethnic ); ?></li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="one-half">
 	 			<ul>
-	 				<li>Height: <?php echo esc_html( $height ); ?></li>
-	 				<li>Weight:<?php echo esc_html( $weight ); ?> </li>
+	 				<?php if (!empty($height)) { ?><li><strong>Height:</strong> <?php echo esc_html( $height ); ?></li><?php } ?>
+	 				<?php if (!empty($weight)) { ?><li><strong>Weight:</strong> <?php echo esc_html( $weight ); ?> </li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="clearfix"></div>
-			<p><?php echo esc_html( $detail ); ?></p>
+ 			<p><strong>Description</strong><br>
+			<?php echo esc_html( $detail ); ?></p>
 		</section>
+
+
 	</article>
 
 	<?php endwhile; else : ?>
@@ -67,8 +72,6 @@ function my_scripts_method() {
 	wp_enqueue_style( 'photo_gallery_lity_lightbox_css', plugin_dir_url( __FILE__ ) . 'css/lity.min.css' );
 	wp_enqueue_script( 'photo_gallery_lity_lightbox_js', plugin_dir_url( __FILE__ ) . 'js/lity.min.js',	array( 'jquery' ));
 }
-
-// Add Modal Custom HTML
 
  
 /** Replace the standard loop with our custom loop */
