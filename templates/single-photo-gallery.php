@@ -39,20 +39,21 @@ function pgsa_custom_single_loop() { ?>
 		<section class="pgsa-patient-info">
  			<div class="one-half first">
 	 			<ul>
+	 				<li><?php echo get_the_term_list( $post->ID, 'procedures', '', ', ', '' ); ?></li>
 	 				<?php if (!empty($age)) { ?><li><strong>Age:</strong> <?php echo esc_html( $age ); ?></li><?php } ?>
 	 				<?php if (!empty($gender)) { ?><li><strong>Gender:</strong> <?php echo esc_html( $gender ); ?></li><?php } ?>
-	 				<?php if (!empty($ethnic)) { ?><li><strong>Ethnicity:</strong> <?php echo esc_html( $ethnic ); ?></li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="one-half">
 	 			<ul>
+	 				<?php if (!empty($ethnic)) { ?><li><strong>Ethnicity:</strong> <?php echo esc_html( $ethnic ); ?></li><?php } ?>
 	 				<?php if (!empty($height)) { ?><li><strong>Height:</strong> <?php echo esc_html( $height ); ?></li><?php } ?>
 	 				<?php if (!empty($weight)) { ?><li><strong>Weight:</strong> <?php echo esc_html( $weight ); ?> </li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="clearfix"></div>
- 			<p><strong>Description</strong><br>
-			<?php echo esc_html( $detail ); ?></p>
+ 			<?php if (!empty($detail)) { ?><p><strong>Description</strong><br>
+			<?php echo esc_html( $detail ); ?></p><?php } ?>
 		</section>
 
 
