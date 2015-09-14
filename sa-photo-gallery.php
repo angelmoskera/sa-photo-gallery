@@ -50,6 +50,12 @@ function pgsa_create_posttype() {
 
 add_action( 'init', 'pgsa_create_posttype' );
 
+//Remove post slug box
+function pgsa_remove_slug_field() {
+	remove_meta_box( 'slugdiv' , 'photo-gallery' , 'normal' ); 
+}
+add_action( 'admin_menu' , 'pgsa_remove_slug_field' );
+
 // Add Custom css to Admin Área
 function pgsa_custom_admin_css($hook) { 
 	if( get_post_type() == 'photo-gallery' ) {

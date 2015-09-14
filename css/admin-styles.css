@@ -1,6 +1,15 @@
 /***************************************************************
 	CUSTOM STYLES FOR ADMIN AREA
 ***************************************************************/
+/*Other styles*/
+#edit-slug-box{
+  display: none;
+}
+
+
+
+
+/***************** Backend Layout *******************/
 .pgsa-select-view{
 	padding-right: 50% !important;
 }
