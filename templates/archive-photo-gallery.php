@@ -1,6 +1,6 @@
 <?php
 
-//Add Custom Loop
+//Replace the custom genesis loop
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'pgsa_custom_archive_loop' );
 
@@ -14,15 +14,13 @@ function pgsa_custom_archive_loop() { ?>
 		    $height = get_post_meta( get_the_ID(), '_pgsa_info_height', true );
 		    $weight = get_post_meta( get_the_ID(), '_pgsa_info_weight', true );
 	    	$detail = get_post_meta( get_the_ID(), '_pgsa_info_procedure_detail', true );
-
 	// Echo the metadata
-	
 	?>
 
 	<article <?php post_class() ?> >
 
 		<?php foreach ( $patient_photos as $index => $value ) { ?>
-			<?php if ($index == 0) { ?>
+			<?php if ($index == 0) { ?> <!-- Show only first set of photos -->
 			<div class="one-fourth first">							
 				<a href="<?php the_permalink() ?>"><img src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
 			</div>
@@ -31,7 +29,6 @@ function pgsa_custom_archive_loop() { ?>
 			</div>
 			<?php } ?>
 		<?php } ?>
-
 
 		<div class="two-fourths">
 			
@@ -53,11 +50,7 @@ function pgsa_custom_archive_loop() { ?>
  			</section>
  			
 		</div>
-		
-
 	</article>
-
-
 
 
 	<?php endwhile; else : ?>
@@ -66,10 +59,5 @@ function pgsa_custom_archive_loop() { ?>
 
 <?php }
  
-/** Replace the standard loop with our custom loop */
-
-
-
-
 
 genesis();

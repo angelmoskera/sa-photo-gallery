@@ -4,6 +4,8 @@
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 add_action( 'genesis_after_entry_content', 'genesis_prev_next_post_nav', 5 );
 
+
+//Replace the custom genesis loop
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'pgsa_custom_single_loop' );
 function pgsa_custom_single_loop() { ?>
@@ -17,6 +19,7 @@ function pgsa_custom_single_loop() { ?>
 		    $height = get_post_meta( get_the_ID(), '_pgsa_info_height', true );
 		    $weight = get_post_meta( get_the_ID(), '_pgsa_info_weight', true );
 	    	$detail = get_post_meta( get_the_ID(), '_pgsa_info_procedure_detail', true );
+	    $procedures = get_the_term_list( $post->ID, 'procedures', '', ', ', '' );
 	// Echo the metadata
 	?>
 
@@ -27,11 +30,11 @@ function pgsa_custom_single_loop() { ?>
 
 			<div class="one-half first">							
 				<a href="<?php echo $value['_pgsa_photos_before_photo']; ?>"  data-lity><img src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
-				<p><strong>Before</strong><?php if (!empty($value['_pgsa_photos_before_caption'])) { ?>: <?php echo $value['_pgsa_photos_before_caption']; ?><?php } ?></p>
+				<p><span class="pgsa-photo-caption pgsa-photo-caption-before">Before</span><?php if (!empty($value['_pgsa_photos_before_caption'])) { ?>: <?php echo $value['_pgsa_photos_before_caption']; ?><?php } ?></p>
 			</div>
 			<div class="one-half">								
 				<a href="<?php echo $value['_pgsa_photos_after_photo']; ?>"   data-lity><img src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a>
-				<p><strong>After</strong><?php if (!empty($value['_pgsa_photos_after_photo'])) { ?>: <?php echo $value['_pgsa_photos_after_caption']; ?><?php } ?></p>
+				<p><span class="pgsa-photo-caption pgsa-photo-caption-after">After</span><?php if (!empty($value['_pgsa_photos_after_photo'])) { ?>: <?php echo $value['_pgsa_photos_after_caption']; ?><?php } ?></p>
 			</div>
 		<?php } ?>
 
@@ -39,21 +42,21 @@ function pgsa_custom_single_loop() { ?>
 		<section class="pgsa-patient-info">
  			<div class="one-half first">
 	 			<ul>
-	 				<li><?php echo get_the_term_list( $post->ID, 'procedures', '', ', ', '' ); ?></li>
-	 				<?php if (!empty($age)) { ?><li><strong>Age:</strong> <?php echo esc_html( $age ); ?></li><?php } ?>
-	 				<?php if (!empty($gender)) { ?><li><strong>Gender:</strong> <?php echo esc_html( $gender ); ?></li><?php } ?>
+	 				<li><span class="pgsa-info-label pgsa-info-label-procedures">Procedures:</span> <?php echo $procedures ?></li>
+	 				<?php if (!empty($age)) { ?><li><span class="pgsa-info-label pgsa-info-label-age">Age:</span> <?php echo esc_html( $age ); ?></li><?php } ?>
+	 			 	<?php if (!empty($gender)) { ?><li><span class="pgsa-info-label pgsa-info-label-gender">Gender:</span> <?php echo esc_html( $gender ); ?></li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="one-half">
 	 			<ul>
-	 				<?php if (!empty($ethnic)) { ?><li><strong>Ethnicity:</strong> <?php echo esc_html( $ethnic ); ?></li><?php } ?>
-	 				<?php if (!empty($height)) { ?><li><strong>Height:</strong> <?php echo esc_html( $height ); ?></li><?php } ?>
-	 				<?php if (!empty($weight)) { ?><li><strong>Weight:</strong> <?php echo esc_html( $weight ); ?> </li><?php } ?>
+	 				<?php if (!empty($ethnic)) { ?><li><span class="pgsa-info-label pgsa-info-label-ethnicity">Ethnicity:</span> <?php echo esc_html( $ethnic ); ?></li><?php } ?>
+	 				<?php if (!empty($height)) { ?><li><span class="pgsa-info-label pgsa-info-label-height">Height:</span> <?php echo esc_html( $height ); ?></li><?php } ?>
+	 				<?php if (!empty($weight)) { ?><li><span class="pgsa-info-label pgsa-info-label-weight">Weight:</span> <?php echo esc_html( $weight ); ?> </li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="clearfix"></div>
- 			<?php if (!empty($detail)) { ?><p><strong>Description</strong><br>
-			<?php echo esc_html( $detail ); ?></p><?php } ?>
+ 			<?php if (!empty($detail)) { ?><span class="pgsa-info-label pgsa-info-label-detail">Description</span>
+			<p><?php echo esc_html( $detail ); ?></p><?php } ?>
 		</section>
 
 
