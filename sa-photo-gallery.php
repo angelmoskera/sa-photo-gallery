@@ -135,8 +135,8 @@ function cmb2_sample_metaboxes() {
     'type'             => 'select',
     'show_option_none' => true,
     'options'          => array(
-        'female' => __( 'Female', 'cmb' ),
-        'male'   => __( 'Male', 'cmb' ),
+        'Female' => __( 'Female', 'cmb' ),
+        'Male'   => __( 'Male', 'cmb' ),
 	    ),
     'row_classes' => 'col-md-4',
 	) );
@@ -149,9 +149,9 @@ function cmb2_sample_metaboxes() {
     'type'             => 'select',
     'show_option_none' => true,
     'options'          => array(
-        'caucasian' => __( 'Caucasian', 'cmb' ),
-        'african'   => __( 'African american', 'cmb' ),    
-        'asian'   	=> __( 'Asian', 'cmb' ),
+        'Caucasian' => __( 'Caucasian', 'cmb' ),
+        'African American'   => __( 'African american', 'cmb' ),    
+        'Asian'   	=> __( 'Asian', 'cmb' ),
 	    ),
     'row_classes' => 'col-md-4',
 	) );
