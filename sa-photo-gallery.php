@@ -304,24 +304,25 @@ function my_bulk_post_updated_messages_filter( $bulk_messages, $bulk_counts ) {
 add_filter( 'bulk_post_updated_messages', 'my_bulk_post_updated_messages_filter', 10, 2 );
 
 //Contextual Help
-function my_contextual_help( $contextual_help, $screen_id, $screen ) { 
-  if ( 'photo-gallery' == $screen->id ) {
-
-    $contextual_help = '<h2>Products</h2>
-    <p>Products show the details of the items that we sell on the website. You can see a list of them on this page in reverse chronological order - the latest one we added is first.</p> 
-    <p>You can view/edit the details of each product by clicking on its name, or you can perform bulk actions using the dropdown menu and selecting multiple items.</p>';
-
-  } elseif ( 'edit-product' == $screen->id ) {
-
-    $contextual_help = '<h2>Editing products</h2>
-    <p>This page allows you to view/modify product details. Please make sure to fill out the available boxes with the appropriate details (product image, price, brand) and <strong>not</strong> add these details to the product description.</p>';
-
-  }
-  return $contextual_help;
+add_action('load-post-new.php', 'myplugin_help');
+add_action('load-post.php', 'myplugin_help');
+ 
+function myplugin_help() {
+   add_filter('contextual_help','load_myplugin_help');
 }
-add_action( 'contextual_help', 'my_contextual_help', 10, 3 );
+ 
+function load_myplugin_help($help) {
+    get_current_screen()->add_help_tab( array(
+        'id'        => 'myplugin-help',
+        'title'     => __('My Plugin Help'),
+        'content'   => "<p>Help for my plugin</p>"
+    ) );
 
-
-
+    get_current_screen()->add_help_tab( array(
+        'id'        => 'myplugin-help 2',
+        'title'     => __('My Plugin Help 2'),
+        'content'   => "<p>Help for my plugin 2</p>"
+    ) );
+}
 
 ?>
