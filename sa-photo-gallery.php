@@ -74,24 +74,6 @@ function pgsa_custom_admin_css($hook) {
 add_action( 'admin_enqueue_scripts', 'pgsa_custom_admin_css' );
 
 
-// Interaction Messsages
-function my_bulk_post_updated_messages_filter( $bulk_messages, $bulk_counts ) {
-
-    $bulk_messages['photo-gallery'] = array(
-        'updated'   => _n( '%s Patient updated.', '%s Patients updated.', $bulk_counts['updated'] ),
-        'locked'    => _n( '%s Patient not updated, somebody is editing it.', '%s Patients not updated, somebody is editing them.', $bulk_counts['locked'] ),
-        'deleted'   => _n( '%s Patient permanently deleted.', '%s Patients permanently deleted.', $bulk_counts['deleted'] ),
-        'trashed'   => _n( '%s Patient moved to the Trash.'.the_permalink().' gg', '%s Patients moved to the Trash.', $bulk_counts['trashed'] ),
-        'untrashed' => _n( '%s Patient restored from the Trash.', '%s Patients restored from the Trash.', $bulk_counts['untrashed'] ),
-    );
-
-    return $bulk_messages;
-
-}
-
-add_filter( 'bulk_post_updated_messages', 'my_bulk_post_updated_messages_filter', 10, 2 );
-
-
 // Force use of template
 add_filter( 'template_include', 'include_pgsa_template', 1 );
 function include_pgsa_template( $template_path ){
@@ -293,8 +275,6 @@ function pgsa_patient_photos() {
 }
 
 
-
-
 add_action( 'init', 'pgsa_initialize_cmb_meta_boxes', 9999 );
 function pgsa_initialize_cmb_meta_boxes() {
 	if ( file_exists(  __DIR__ . '/custom_metaboxes/init.php' ) ) {
@@ -303,6 +283,45 @@ function pgsa_initialize_cmb_meta_boxes() {
 	  require_once  __DIR__ . '/custom_metaboxes/init.php';
 	}
 }
+
+
+
+// Interaction Messsages
+function my_bulk_post_updated_messages_filter( $bulk_messages, $bulk_counts ) {
+
+    $bulk_messages['photo-gallery'] = array(
+        'updated'   => _n( '%s Patient updated.', '%s Patients updated.', $bulk_counts['updated'] ),
+        'locked'    => _n( '%s Patient not updated, somebody is editing it.', '%s Patients not updated, somebody is editing them.', $bulk_counts['locked'] ),
+        'deleted'   => _n( '%s Patient permanently deleted.', '%s Patients permanently deleted.', $bulk_counts['deleted'] ),
+        'trashed'   => _n( '%s Patient moved to the Trashgg', '%s Patients moved to the Trash.', $bulk_counts['trashed'] ),
+        'untrashed' => _n( '%s Patient restored from the Trash.', '%s Patients restored from the Trash.', $bulk_counts['untrashed'] ),
+    );
+
+    return $bulk_messages;
+
+}
+
+add_filter( 'bulk_post_updated_messages', 'my_bulk_post_updated_messages_filter', 10, 2 );
+
+//Contextual Help
+function my_contextual_help( $contextual_help, $screen_id, $screen ) { 
+  if ( 'photo-gallery' == $screen->id ) {
+
+    $contextual_help = '<h2>Products</h2>
+    <p>Products show the details of the items that we sell on the website. You can see a list of them on this page in reverse chronological order - the latest one we added is first.</p> 
+    <p>You can view/edit the details of each product by clicking on its name, or you can perform bulk actions using the dropdown menu and selecting multiple items.</p>';
+
+  } elseif ( 'edit-product' == $screen->id ) {
+
+    $contextual_help = '<h2>Editing products</h2>
+    <p>This page allows you to view/modify product details. Please make sure to fill out the available boxes with the appropriate details (product image, price, brand) and <strong>not</strong> add these details to the product description.</p>';
+
+  }
+  return $contextual_help;
+}
+add_action( 'contextual_help', 'my_contextual_help', 10, 3 );
+
+
 
 
 ?>
