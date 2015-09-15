@@ -46,7 +46,7 @@ function pgsa_custom_archive_loop() { ?>
  				<li>Weight:<?php echo esc_html( $weight ); ?> </li>
  			</ul>
 
- 			<a href="<?php the_permalink() ?>">View Photos »</a>
+ 			<a href="<?php the_permalink() ?>">View Photos <i class="fa fa-angle-double-right"></i></a>
  			</section>
  			
 		</div>

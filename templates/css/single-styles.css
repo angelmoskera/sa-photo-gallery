@@ -1,8 +1,14 @@
 /***************************************************************
 	CUSTOM STYLES FOR SINGLE TEMPLATE
 ***************************************************************/
-.pgsa-patient-info{
-	
+.pgsa-patient-info .pgsa-info-label{
+	font-weight: bold;
+  display: inline-block;
+
+}
+
+.pgsa-patient-info ul li{
+  list-style: none;
 }
 
 .lity-image img{
