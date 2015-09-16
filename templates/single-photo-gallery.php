@@ -42,24 +42,24 @@ function pgsa_custom_single_loop() { ?>
 		<section class="pgsa-patient-info">
  			<div class="one-third first">
 	 			<ul class="pgsa-info-label-list">
-	 				<li><span class="pgsa-info-label pgsa-info-label-procedures">Procedures:</span> <?php echo $procedures ?></li>
-	 				<?php if (!empty($age)) { ?><li><span class="pgsa-info-label pgsa-info-label-age">Age:</span> <?php echo esc_html( $age ); ?></li><?php } ?>
+	 				<li><span class="pgsa-info-label-single pgsa-info-label-procedures">Procedures:</span> <?php echo $procedures ?></li>
+	 				<?php if (!empty($age)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-age">Age:</span> <?php echo esc_html( $age ); ?></li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="one-third">
 	 			<ul class="pgsa-info-label-list">
-	 				<?php if (!empty($ethnic)) { ?><li><span class="pgsa-info-label pgsa-info-label-ethnicity">Ethnicity:</span> <?php echo esc_html( $ethnic ); ?></li><?php } ?>
-	 				<?php if (!empty($height)) { ?><li><span class="pgsa-info-label pgsa-info-label-height">Height:</span> <?php echo esc_html( $height ); ?></li><?php } ?>
+	 				<?php if (!empty($ethnic)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-ethnicity">Ethnicity:</span> <?php echo esc_html( $ethnic ); ?></li><?php } ?>
+	 				<?php if (!empty($height)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-height">Height:</span> <?php echo esc_html( $height ); ?></li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="one-third">
 	 			<ul class="pgsa-info-label-list">
-	 			 	<?php if (!empty($gender)) { ?><li><span class="pgsa-info-label pgsa-info-label-gender">Gender:</span> <?php echo esc_html( $gender ); ?></li><?php } ?>
-	 				<?php if (!empty($weight)) { ?><li><span class="pgsa-info-label pgsa-info-label-weight">Weight:</span> <?php echo esc_html( $weight ); ?> </li><?php } ?>
+	 			 	<?php if (!empty($gender)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-gender">Gender:</span> <?php echo esc_html( $gender ); ?></li><?php } ?>
+	 				<?php if (!empty($weight)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-weight">Weight:</span> <?php echo esc_html( $weight ); ?> </li><?php } ?>
 	 			</ul>
  			</div>
  			<div class="clearfix"></div>
- 			<?php if (!empty($detail)) { ?><span class="pgsa-info-label pgsa-info-label-detail">Description:</span>
+ 			<?php if (!empty($detail)) { ?><span class="pgsa-info-label-single pgsa-info-label-detail">Description:</span>
 			<p><?php echo esc_html( $detail ); ?></p><?php } ?>
 		</section>
 
