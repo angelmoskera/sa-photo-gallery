@@ -4,6 +4,15 @@
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 add_action( 'genesis_after_entry_content', 'genesis_prev_next_post_nav', 5 );
 
+// Load Next and Prev Patients after the header
+function pgsa_prev_next_post_nav() {
+	if ( 'photo-gallery' == get_post_type()) {
+		echo '<div class="wrap"><div class="prev-next-navigation">';
+			previous_post_link( '<div class="previous">%link</div>', '« %title', TRUE, ' ', 'procedures' );	next_post_link( '<div class="next">%link</div>', '%title »', TRUE, ' ', 'procedures' );
+		echo '</div></div>';
+	}
+}
+add_action( 'genesis_after_header', 'pgsa_prev_next_post_nav' );
 
 //Replace the custom genesis loop
 remove_action( 'genesis_loop', 'genesis_do_loop' );
@@ -23,17 +32,17 @@ function pgsa_custom_single_loop() { ?>
 	// Echo the metadata
 	?>
 
-	<?php previous_post('&laquo;&laquo; %', 'Previous Patient ', 'no'); ?> | <?php next_post('% &raquo;&raquo; ', 'Next Patient ', 'no'); ?>
 	<article <?php post_class() ?> >
+
 		<h1><?php the_title(); ?></h1>
 		<?php foreach ( $patient_photos as $value ) { ?>
 
 			<div class="one-half first">							
-				<a href="<?php echo $value['_pgsa_photos_before_photo']; ?>"  data-lity><img src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
+				<a href="<?php echo $value['_pgsa_photos_before_photo']; ?>" data-lity><img id="imageresource" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
 				<p><span class="pgsa-photo-caption pgsa-photo-caption-before">Before</span><?php if (!empty($value['_pgsa_photos_before_caption'])) { ?>: <?php echo $value['_pgsa_photos_before_caption']; ?><?php } ?></p>
 			</div>
-			<div class="one-half">								
-				<a href="<?php echo $value['_pgsa_photos_after_photo']; ?>"   data-lity><img src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a>
+			<div class="one-half">
+				<a href="<?php echo $value['_pgsa_photos_after_photo']; ?>" data-lity><img id="imageresource" src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a>
 				<p><span class="pgsa-photo-caption pgsa-photo-caption-after">After</span><?php if (!empty($value['_pgsa_photos_after_photo'])) { ?>: <?php echo $value['_pgsa_photos_after_caption']; ?><?php } ?></p>
 			</div>
 		<?php } ?>
@@ -70,6 +79,7 @@ function pgsa_custom_single_loop() { ?>
 		<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
 	<?php endif; ?>
 
+
 <?php } //End Custom Loop
 
 
@@ -77,8 +87,8 @@ function pgsa_custom_single_loop() { ?>
 add_action( 'wp_enqueue_scripts', 'pgsa_script_css_single' );
 function pgsa_script_css_single() {
 	wp_enqueue_style( 'photo_gallery_single_styles', plugin_dir_url( __FILE__ ) . 'css/single-styles.css' );
-	wp_enqueue_style( 'photo_gallery_lity_lightbox_css', plugin_dir_url( __FILE__ ) . 'css/lity.min.css' );
-	wp_enqueue_script( 'photo_gallery_lity_lightbox_js', plugin_dir_url( __FILE__ ) . 'js/lity.min.js',	array( 'jquery' ));
+	wp_enqueue_style( 'photo_gallery_lity_lightbox_js', plugin_dir_url( __FILE__ ) . 'css/lity.min.css');
+	wp_enqueue_script( 'photo_gallery_lity_lightbox_css', plugin_dir_url( __FILE__ ) . 'js/lity.min.js',	array( 'jquery' ) );
 }
 
  

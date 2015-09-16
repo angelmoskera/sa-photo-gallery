@@ -10,7 +10,7 @@
  // Load the auto-update class
 require 'plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-    'http://ugel02.gob.pe/update.json', 
+    'http://ayarmas.surgeonsadvisor.com/update.json', 
     __FILE__
 );
 
@@ -285,7 +285,6 @@ function pgsa_initialize_cmb_meta_boxes() {
 }
 
 
-
 // Interaction Messsages
 function pgsa_post_update_messages( $bulk_messages, $bulk_counts ) {
 	global $post, $post_ID;
@@ -307,14 +306,14 @@ function pgsa_post_update_messages( $bulk_messages, $bulk_counts ) {
 add_filter( 'bulk_post_updated_messages', 'pgsa_post_update_messages', 10, 2 );
 
 //Contextual Help
-add_action('load-post-new.php', 'myplugin_help');
-add_action('load-post.php', 'myplugin_help');
+add_action('load-post-new.php', 'pgsa_plugin_help');
+add_action('load-post.php', 'pgsa_plugin_help');
  
-function myplugin_help() {
-   add_filter('contextual_help','load_myplugin_help');
+function pgsa_plugin_help() {
+   add_filter('contextual_help','pgsa_plugin_help_tabs');
 }
  
-function load_myplugin_help($help) {
+function pgsa_plugin_help_tabs($help) {
     get_current_screen()->add_help_tab( array(
         'id'        => 'pgsa_help_main',
         'title'     => __('Overview'),
@@ -329,15 +328,13 @@ function load_myplugin_help($help) {
 }
 
 //Register Sidebar
-$templates = wp_get_theme()->get_stylesheet() ;
-				    
-
-add_action( 'widgets_init', 'theme_slug_widgets_init' );
-function theme_slug_widgets_init() {
+$templates = wp_get_theme()->get_stylesheet() ; //Get theme slug
+add_action( 'widgets_init', 'pgsa_widget_sidebar_taxonomy' );
+function pgsa_widget_sidebar_taxonomy() {
     register_sidebar( array(
         'name' => __( 'Main Sidebar', print_r($templates) ),
         'id' => 'sidebar-1',
-        'description' => __( 'Widgets in this area will be shown on all posts and pages.', 'theme-slug' ),
+        'description' => __( 'Photo Gallery Specific Sidebar', print_r($templates) ),
         'before_widget' => '<li id="%1$s" class="widget %2$s">',
 	'after_widget'  => '</li>',
 	'before_title'  => '<h2 class="widgettitle">',
