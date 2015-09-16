@@ -287,21 +287,24 @@ function pgsa_initialize_cmb_meta_boxes() {
 
 
 // Interaction Messsages
-function my_bulk_post_updated_messages_filter( $bulk_messages, $bulk_counts ) {
+function pgsa_post_update_messages( $bulk_messages, $bulk_counts ) {
+	global $post, $post_ID;
+	$redirectpg_perma = esc_url( add_query_arg( '', '', get_permalink($post_ID) ) ) ;
+	$redirectpg_from = str_replace(site_url(), '', $redirectpg_perma);
+	$redirectpg_to = str_replace('/'. basename(get_permalink()), '', $redirectpg_from);    ;
 
     $bulk_messages['photo-gallery'] = array(
         'updated'   => _n( '%s Patient updated.', '%s Patients updated.', $bulk_counts['updated'] ),
         'locked'    => _n( '%s Patient not updated, somebody is editing it.', '%s Patients not updated, somebody is editing them.', $bulk_counts['locked'] ),
         'deleted'   => _n( '%s Patient permanently deleted.', '%s Patients permanently deleted.', $bulk_counts['deleted'] ),
-        'trashed'   => _n( '%s Patient moved to the Trashgg', '%s Patients moved to the Trash.', $bulk_counts['trashed'] ),
+        'trashed'   => _n( '%s Patient moved to the Trash, <br />Please add this redirect to .htaccess if necessary: <br/> <span class="pgsa-apply-redirect">Redirect 301 '.$redirectpg_from.' '.$redirectpg_to.'</span><br />', 
+        				   '%s Patient moved to the Trash, <br />Please add this redirect to .htaccess if necessary: <br/> <span class="pgsa-apply-redirect">Redirect 301 '.$redirectpg_from.' '.$redirectpg_to.'</span><br />', $bulk_counts['trashed'] ),
         'untrashed' => _n( '%s Patient restored from the Trash.', '%s Patients restored from the Trash.', $bulk_counts['untrashed'] ),
     );
-
     return $bulk_messages;
-
 }
 
-add_filter( 'bulk_post_updated_messages', 'my_bulk_post_updated_messages_filter', 10, 2 );
+add_filter( 'bulk_post_updated_messages', 'pgsa_post_update_messages', 10, 2 );
 
 //Contextual Help
 add_action('load-post-new.php', 'myplugin_help');
@@ -313,15 +316,32 @@ function myplugin_help() {
  
 function load_myplugin_help($help) {
     get_current_screen()->add_help_tab( array(
-        'id'        => 'myplugin-help',
-        'title'     => __('My Plugin Help'),
-        'content'   => "<p>Help for my plugin</p>"
+        'id'        => 'pgsa_help_main',
+        'title'     => __('Overview'),
+        'content'   => "<p>Overview info here</p>"
     ) );
 
     get_current_screen()->add_help_tab( array(
-        'id'        => 'myplugin-help 2',
-        'title'     => __('My Plugin Help 2'),
-        'content'   => "<p>Help for my plugin 2</p>"
+        'id'        => 'pgsa_help_wiki',
+        'title'     => __('Resources'),
+        'content'   => "<p>Resources info here</p>"
+    ) );
+}
+
+//Register Sidebar
+$templates = wp_get_theme()->get_stylesheet() ;
+				    
+
+add_action( 'widgets_init', 'theme_slug_widgets_init' );
+function theme_slug_widgets_init() {
+    register_sidebar( array(
+        'name' => __( 'Main Sidebar', print_r($templates) ),
+        'id' => 'sidebar-1',
+        'description' => __( 'Widgets in this area will be shown on all posts and pages.', 'theme-slug' ),
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+	'after_widget'  => '</li>',
+	'before_title'  => '<h2 class="widgettitle">',
+	'after_title'   => '</h2>',
     ) );
 }
 
