@@ -73,9 +73,9 @@ function pgsa_custom_single_loop() { ?>
 <?php } //End Custom Loop
 
 
-// Add Modal Scripts
-add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
-function my_scripts_method() {
+// Add Custom Scripts & CSS
+add_action( 'wp_enqueue_scripts', 'pgsa_script_css_single' );
+function pgsa_script_css_single() {
 	wp_enqueue_style( 'photo_gallery_single_styles', plugin_dir_url( __FILE__ ) . 'css/single-styles.css' );
 	wp_enqueue_style( 'photo_gallery_lity_lightbox_css', plugin_dir_url( __FILE__ ) . 'css/lity.min.css' );
 	wp_enqueue_script( 'photo_gallery_lity_lightbox_js', plugin_dir_url( __FILE__ ) . 'js/lity.min.js',	array( 'jquery' ));
