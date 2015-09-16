@@ -35,15 +35,15 @@ function pgsa_custom_archive_loop() { ?>
  			<h3><?php echo get_the_term_list( $post->ID, 'procedures', '', ', ', '' ); ?> </h3>
  			<section class="one-half first">
  			<ul>
- 				<li>Age: <?php echo esc_html( $age ); ?></li>
- 				<li>Gender: <?php echo esc_html( $gender ); ?></li>
- 				<li>Ethnicity: <?php echo esc_html( $ethnic ); ?></li>
+ 				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Age:</span> <?php echo esc_html( $age ); ?></li>
+ 				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Gender:</span> <?php echo esc_html( $gender ); ?></li>
+ 				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Ethnicity:</span> <?php echo esc_html( $ethnic ); ?></li>
  			</ul>
  			</section>
  			<section class="one-half">
  			<ul>
- 				<li>Height: <?php echo esc_html( $height ); ?></li>
- 				<li>Weight:<?php echo esc_html( $weight ); ?> </li>
+ 				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Height:</span> <?php echo esc_html( $height ); ?></li>
+ 				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Weight:</span> <?php echo esc_html( $weight ); ?> </li>
  			</ul>
 
  			<a href="<?php the_permalink() ?>">View Photos <i class="fa fa-angle-double-right"></i></a>
