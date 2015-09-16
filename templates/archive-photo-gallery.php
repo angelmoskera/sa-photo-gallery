@@ -30,7 +30,7 @@ function pgsa_custom_archive_loop() { ?>
 			<?php } ?>
 		<?php } ?>
 
-		<div class="two-fourths">
+		<div class="two-fourths pgsa-patient-info">
 			
  			<h3><?php echo get_the_term_list( $post->ID, 'procedures', '', ', ', '' ); ?> </h3>
  			<section class="one-half first">
@@ -58,6 +58,11 @@ function pgsa_custom_archive_loop() { ?>
 	<?php endif; ?>
 
 <?php }
- 
+
+// Add Custom Scripts & CSS
+add_action( 'wp_enqueue_scripts', 'pgsa_script_css_single' );
+function pgsa_script_css_single() {
+	wp_enqueue_style( 'photo_gallery_single_styles', plugin_dir_url( __FILE__ ) . 'css/archive-styles.css' );
+}
 
 genesis();

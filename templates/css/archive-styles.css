@@ -1,0 +1,7 @@
+.pgsa-patient-info li{
+	list-style: none;
+}
+
+.pgsa-patient-info .pgsa-info-label-archive{
+	font-weight: bold;
+}
