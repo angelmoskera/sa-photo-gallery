@@ -7,18 +7,14 @@ add_action( 'genesis_loop', 'pgsa_custom_archive_loop' );
 function pgsa_custom_archive_loop() { 
 
 //Loop Variables
-$terms = get_terms("procedures");
+$terms = get_terms('procedures');
 $count = count($terms);
 
 if ( $count > 0 ){
     foreach ( $terms as $term ) {
 
     	$term_link = get_term_link( $term );
-    	 
-    	?>
-
-        
-
+    	?> 
 		<?php
         $loop = new WP_Query( array( 
             'post_type' => 'photo-gallery',
@@ -40,11 +36,14 @@ if ( $count > 0 ){
         $patient_photos = get_post_meta( get_the_ID(), '_pgsa_photos_patient-photos', true );
         ?>
         <article <?php post_class() ?>>
-<h2><a href="<?php esc_url( $term_link ) ?>"><?php echo $term->name ?></a></h2>
+
+			<h2><?php echo get_the_term_list( $post->ID, 'procedures', '', '' ); ?></h2> 
+			
+
+
 
 		<?php foreach ( $patient_photos as $index => $value ) { ?>
 			<?php if ($index <= 1) { ?> <!-- Show only the first TWO set of photos -->
-			
 			<div class="one-fourth">		 					
 				<a href="<?php the_permalink() ?>"><img src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
 			</div>
