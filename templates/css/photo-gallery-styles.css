@@ -5,3 +5,10 @@
 .pgsa-patient-info .pgsa-info-label-archive{
 	font-weight: bold;
 }
+
+
+/* PHOTO GALLERY ENTRIES */
+.photo-gallery.entry .one-fourth:nth-child(2){
+	margin-left: 0;
+	clear: both;  
+}

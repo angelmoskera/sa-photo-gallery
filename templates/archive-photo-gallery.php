@@ -73,7 +73,7 @@ if ( $count > 0 ){
 // Add Custom Scripts & CSS
 add_action( 'wp_enqueue_scripts', 'pgsa_script_css_archive' );
 function pgsa_script_css_archive() {
-	wp_enqueue_style( 'photo_gallery_archive_styles', plugin_dir_url( __FILE__ ) . 'css/archive-styles.css' );
+	wp_enqueue_style( 'photo_gallery_archive_styles', plugin_dir_url( __FILE__ ) . 'css/photo-gallery-styles.css' );
 }
 
 genesis();
