@@ -1,6 +1,15 @@
 /***************************************************************
 	CUSTOM STYLES FOR SINGLE TEMPLATE
 ***************************************************************/
+.pgsa-info-label-single{
+  font-weight: bold;
+}
+
+.pgsa-photo-caption{
+  text-align: center;
+  font-weight: bold;
+}
+
 .pgsa-patient-info .pgsa-info-label{
 	font-weight: bold;
   display: inline-block;
