@@ -70,11 +70,11 @@ function pgsa_custom_single_loop() { ?>
 			<div itemscope itemtype="https://schema.org/ImageGallery">
 				<h3 itemprop="name"><?php echo $value['_pgsa_photos_view_select']; ?></h3>
 				<div class="one-half first">							
-					<a href="<?php echo $value['_pgsa_photos_before_photo']; ?>" data-lity><img itemprop="image" class="aligncenter imageresource" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
+					<div class="pgsa-photo"><a href="<?php echo $value['_pgsa_photos_before_photo']; ?>" data-lity><img itemprop="image" class="imageresource" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a></div>
 					<p class="pgsa-photo-caption"><span class="pgsa-photo-caption-before">Before</span><?php if (!empty($value['_pgsa_photos_before_caption'])) { ?>: <?php echo $value['_pgsa_photos_before_caption']; ?><?php } ?></p>
 				</div>
 				<div class="one-half">
-					<a href="<?php echo $value['_pgsa_photos_after_photo']; ?>" data-lity><img itemprop="image"  class="aligncenter imageresource" src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a>
+					<div class="pgsa-photo"><a href="<?php echo $value['_pgsa_photos_after_photo']; ?>" data-lity><img itemprop="image"  class="imageresource" src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a></div>
 					<p class="pgsa-photo-caption"><span class="pgsa-photo-caption pgsa-photo-caption-after">After</span><?php if (!empty($value['_pgsa_photos_after_photo'])) { ?> <?php echo $value['_pgsa_photos_after_caption']; ?><?php } ?></p>
 				</div>
 			</div>
