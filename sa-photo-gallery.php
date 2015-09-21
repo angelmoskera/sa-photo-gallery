@@ -77,7 +77,7 @@ add_action( 'admin_enqueue_scripts', 'pgsa_custom_admin_css' );
 // Force use of template
 add_filter( 'template_include', 'include_pgsa_template', 1 );
 function include_pgsa_template( $template_path ){
-    if ( get_post_type() == 'photo-gallery' ) {
+    if ( get_post_type() == 'photo-gallery' && !is_tax( 'procedures' )) {
         if ( is_single() ) {
             // checks if the file exists in the theme first,
             // otherwise serve the file from the plugin
@@ -94,6 +94,17 @@ function include_pgsa_template( $template_path ){
             }
         }
     }
+
+    if (is_tax( 'procedures' )) {
+    	if ( $theme_file = locate_template( array( 'taxonomy-procedures.php' ) ) ) {
+            $template_path = $theme_file;
+        } else {
+            $template_path = plugin_dir_path( __FILE__ ) . '/templates/taxonomy-procedures.php';
+        }
+    }
+
+
+
     return $template_path;
 }
 
