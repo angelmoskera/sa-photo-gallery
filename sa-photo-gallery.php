@@ -321,7 +321,7 @@ function pgsa_post_update_messages( $bulk_messages, $bulk_counts ) {
 	global $post, $post_ID;
 	$redirectpg_perma = esc_url( add_query_arg( '', '', get_permalink($post_ID) ) ) ;
 	$redirectpg_from = str_replace(site_url(), '', $redirectpg_perma);
-	$redirectpg_to = str_replace('/'. basename(get_permalink()), '', $redirectpg_from);    ;
+	$redirectpg_to = str_replace('/'. basename(get_permalink()), '', $redirectpg_from);
 
     $bulk_messages['photo-gallery'] = array(
         'updated'   => _n( '%s Patient updated.', '%s Patients updated.', $bulk_counts['updated'] ),
