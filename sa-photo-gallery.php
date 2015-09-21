@@ -128,6 +128,26 @@ function cmb2_sample_metaboxes() {
         'row_classes' => 'row',
     ) );
 
+    // Doctor Metabox
+    $cmb->add_field( array(
+        'name'       => __( 'Doctor', 'cmb2' ),
+        'desc'       => __( 'Doctor who performed the procedure', 'cmb2' ),
+        'id'         => $prefixinfo . 'doctor',
+        'type'       => 'text',
+        'show_on_cb' => 'cmb2_hide_if_no_cats', 
+        'row_classes' => 'col-md-4',
+    ) );
+
+    // Location Metabox
+    $cmb->add_field( array(
+        'name'       => __( 'Location', 'cmb2' ),
+        'desc'       => __( 'Location where the procedure was performed', 'cmb2' ),
+        'id'         => $prefixinfo . 'location',
+        'type'       => 'text',
+        'show_on_cb' => 'cmb2_hide_if_no_cats', 
+        'row_classes' => 'col-md-4',
+    ) );
+
     // Age Metabox
     $cmb->add_field( array(
         'name'       => __( 'Age', 'cmb2' ),

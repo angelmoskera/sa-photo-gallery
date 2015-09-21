@@ -28,6 +28,8 @@ function pgsa_custom_single_loop() { ?>
 		    $height = get_post_meta( get_the_ID(), '_pgsa_info_height', true );
 		    $weight = get_post_meta( get_the_ID(), '_pgsa_info_weight', true );
 	    	$detail = get_post_meta( get_the_ID(), '_pgsa_info_procedure_detail', true );
+	    	$doctor = get_post_meta( get_the_ID(), '_pgsa_info_doctor', true );
+	      $location = get_post_meta( get_the_ID(), '_pgsa_info_location', true );
 	    $procedures = get_the_term_list( $post->ID, 'procedures', '', ', ', '' );
 	// Echo the metadata
 	?>
@@ -41,6 +43,8 @@ function pgsa_custom_single_loop() { ?>
 		<section itemscope itemtype="http://schema.org/Person" class="pgsa-patient-info">
  			<div class="one-third first">
 	 			<ul class="pgsa-info-label-list">
+	 				<li><span class="pgsa-info-label-single pgsa-info-label-doctor">Doctor:</span> <?php echo esc_html( $doctor ); ?></li>
+	 				<li><span class="pgsa-info-label-single pgsa-info-label-location">Location:</span> <?php echo esc_html( $location ); ?></li>
 	 				<?php if (!empty($age)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-age">Age:</span> <?php echo esc_html( $age ); ?></li><?php } ?>
 	 				<?php if (!empty($gender)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-gender">Gender:</span><span itemprop="gender"> <?php echo esc_html( $gender ); ?></span></li><?php } ?>
 	 			</ul>
