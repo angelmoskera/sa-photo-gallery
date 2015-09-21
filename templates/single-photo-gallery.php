@@ -23,6 +23,7 @@ function pgsa_custom_single_loop() { ?>
 
     $patient_photos = get_post_meta( get_the_ID(), '_pgsa_photos_patient-photos', true );
 		    $age 	= get_post_meta( get_the_ID(), '_pgsa_info_age', true );
+		    $view 	= get_post_meta( get_the_ID(), '_pgsa_photos_view_select', true );
 		    $gender = get_post_meta( get_the_ID(), '_pgsa_info_gender_select', true );
 		    $ethnic = get_post_meta( get_the_ID(), '_pgsa_info_ethnicity_select', true );
 		    $height = get_post_meta( get_the_ID(), '_pgsa_info_height', true );
@@ -67,7 +68,7 @@ function pgsa_custom_single_loop() { ?>
 		<section>
 		<?php foreach ( $patient_photos as $value ) { ?>
 			<div itemscope itemtype="https://schema.org/ImageGallery">
-				<h3 itemprop="name">Front</h3>
+				<h3 itemprop="name"><?php echo $value['_pgsa_photos_view_select']; ?></h3>
 				<div class="one-half first">							
 					<a href="<?php echo $value['_pgsa_photos_before_photo']; ?>" data-lity><img itemprop="image" class="aligncenter imageresource" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
 					<p class="pgsa-photo-caption"><span class="pgsa-photo-caption-before">Before</span><?php if (!empty($value['_pgsa_photos_before_caption'])) { ?>: <?php echo $value['_pgsa_photos_before_caption']; ?><?php } ?></p>
