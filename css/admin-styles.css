@@ -40,6 +40,27 @@ input.cmb2-upload-button.button {
 }
 
 
+
+.cmb2-remove-file-button, .cmb2-remove-file-button:hover{
+  text-decoration: none;
+  background: none !important; 
+  color: transparent;
+  text-indent: 0 !important;
+}
+a.cmb2-remove-file-button:before {
+    content: "\f158";
+    font-family: dashicons;
+    position: absolute;
+    color: #D50000;
+    font-size: 20px;
+    background-color: #FFF;
+    height: 20px;
+    width: 20px;
+    line-height: 1;
+    border-radius: 50%;
+}
+
+
 #cmb2-metabox-_pgsa_info_patient-info .cmb2-wrap select {
     width: 95%;
 }
