@@ -35,7 +35,7 @@ function pgsa_custom_archive_loop() { ?>
  			<h3><?php echo get_the_term_list( $post->ID, 'procedures', '', ', ', '' ); ?> </h3>
  			<section class="one-half first">
  			<ul>
- 				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Age1:</span> <?php echo esc_html( $age ); ?></li>
+ 				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Age:</span> <?php echo esc_html( $age ); ?></li>
  				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Gender:</span> <?php echo esc_html( $gender ); ?></li>
  				<li><span class="pgsa-info-label-archive pgsa-info-label-gender">Ethnicity:</span> <?php echo esc_html( $ethnic ); ?></li>
  			</ul>
