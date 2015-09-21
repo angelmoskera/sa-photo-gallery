@@ -1,7 +1,7 @@
 <?php
 /*
  Plugin Name: Photo Gallery SA
- Plugin URI: http://www.surgeonsadvisor.com/
+ Plugin URI: http://ayarmas:164f11@ayarmas.surgeonsadvisor.com
  Description: Medical Photo Gallery that groups patients with their related procedures.
  Author: Angel Yarmas
  Version: 1.0
@@ -10,8 +10,8 @@
  // Load the auto-update class
 require 'plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-    'http://ayarmas.surgeonsadvisor.com/update.json', 
-    __FILE__
+    'http://ayarmas:164f11@ayarmas.surgeonsadvisor.com/update.json', 
+    __FILE__ 
 );
 
 // Create Photo gallery
