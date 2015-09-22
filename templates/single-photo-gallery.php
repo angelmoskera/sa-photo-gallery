@@ -38,32 +38,29 @@ function pgsa_custom_single_loop() { ?>
 	<article itemscope itemtype="http://schema.org/MedicalProcedure" <?php post_class() ?> >
 		<h1><span itemprop="name"><?php echo $procedures ?></span>	<?php the_title(); ?></h1>
 		<section class="pgsa-surgeon-info">
-			<h3>Surgeon: <span> M.D., F.A.C.S.</span></h3>
-			<h3>Location: <span> </span></h3>
+			<h3>Surgeon: <span><?php echo esc_html( $doctor ); ?> M.D., F.A.C.S.</span></h3>
+			<h3>Location: <span><?php echo esc_html( $location ); ?></span></h3>
 		</section>
 		<section itemscope itemtype="http://schema.org/Person" class="pgsa-patient-info">
  			<div class="one-third first">
 	 			<ul class="pgsa-info-label-list">
-	 				<li><span class="pgsa-info-label-single pgsa-info-label-doctor">Doctor:</span> <?php echo esc_html( $doctor ); ?></li>
-	 				<li><span class="pgsa-info-label-single pgsa-info-label-location">Location:</span> <?php echo esc_html( $location ); ?></li>
-	 				<?php if (!empty($age)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-age">Age:</span> <?php echo esc_html( $age ); ?></li><?php } ?>
-	 				<?php if (!empty($gender)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-gender">Gender:</span><span itemprop="gender"> <?php echo esc_html( $gender ); ?></span></li><?php } ?>
+	 				<li><span class="pgsa-info-label-single pgsa-info-label-age">Age:</span> <?php if (!empty($age)) { ?><?php echo esc_html( $age ); ?><?php } else { echo "Undisclosed"; }?></li>
+	 				<li><span class="pgsa-info-label-single pgsa-info-label-gender">Gender:</span> <span itemprop="gender"><?php if (!empty($gender)) { ?><?php echo esc_html( $gender ); ?><?php } else { echo "Undisclosed"; }?></span></li>
 	 			</ul>
  			</div>
  			<div class="one-third">
 	 			<ul class="pgsa-info-label-list">
-	 				<?php if (!empty($height)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-height">Height:</span> <span itemprop="height"><?php echo esc_html( $height ); ?></span></li><?php } ?>	
-	 				<?php if (!empty($weight)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-weight">Weight:</span> <span itemprop="weight"><?php echo esc_html( $weight ); ?></span></li><?php } ?>
+	 				<li><span class="pgsa-info-label-single pgsa-info-label-height">Height:</span> <span itemprop="height"><?php if (!empty($height)) { ?><?php echo esc_html( $height ); ?><?php } else { echo "0.0"; }?></span></li>	
+	 				<li><span class="pgsa-info-label-single pgsa-info-label-weight">Weight:</span> <span itemprop="weight"><?php if (!empty($weight)) { ?><?php echo esc_html( $weight ); ?><?php } else { echo "0.0"; }?></span></li>
 	 			</ul>
  			</div>
  			<div class="one-third">
 	 			<ul class="pgsa-info-label-list">
-	 			 	<?php if (!empty($ethnic)) { ?><li><span class="pgsa-info-label-single pgsa-info-label-ethnicity">Ethnicity:</span> <?php echo esc_html( $ethnic ); ?></li><?php } ?>
+	 			 	<li><span class="pgsa-info-label-single pgsa-info-label-ethnicity">Ethnicity:</span> <?php if (!empty($ethnic)) { ?><?php echo esc_html( $ethnic ); ?><?php } else { echo "Undisclosed"; }?></li>
 	 			</ul>
  			</div>
  			<div class="clearfix"></div>
- 			<?php if (!empty($detail)) { ?><span class="pgsa-info-label-single pgsa-info-label-detail">Description:</span>
-			<p itemprop="description"><?php echo esc_html( $detail ); ?></p><?php } ?>
+ 			<span class="pgsa-info-label-single pgsa-info-label-detail">Description:</span>	<p itemprop="description"><?php if (!empty($detail)) { ?><?php echo esc_html( $detail ); ?><?php } else { echo "No description added"; }?></p>
 		</section>
 		<section>
 		<?php foreach ( $patient_photos as $value ) { ?>

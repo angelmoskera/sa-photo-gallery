@@ -135,7 +135,7 @@ function cmb2_sample_metaboxes() {
         'id'         => $prefixinfo . 'doctor',
         'type'       => 'text',
         'show_on_cb' => 'cmb2_hide_if_no_cats', 
-        'row_classes' => 'col-md-4',
+       'row_classes' => 'col-md-4',
     ) );
 
     // Location Metabox

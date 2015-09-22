@@ -18,6 +18,7 @@
 
 
 /***************** Backend Layout *******************/
+
 .pgsa-select-view{
 	padding-right: 50% !important;
 }
@@ -38,8 +39,6 @@ input.cmb2-upload-button.button {
     height: 31px;
     left: -2px;
 }
-
-
 
 .cmb2-remove-file-button, .cmb2-remove-file-button:hover{
   text-decoration: none;
@@ -82,7 +81,9 @@ a.cmb2-remove-file-button:before {
 
 
 
+/**DEFAULT VALUES*/
 
+/***/
 @media (min-width: 992px) {
 	#cmb2-metabox-_pgsa_info_patient-info .col-md-4{
 		box-sizing: border-box;
