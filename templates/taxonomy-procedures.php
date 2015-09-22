@@ -37,31 +37,31 @@ echo get_term_by('slug',$value,$wp_query->query_vars['procedures']);
 	// Echo the metadata
 	?>
 
-	<article <?php post_class(); ?> >
-		<h1><span itemprop="name"><?php echo $procedures ?></span></h1>
+	<article  itemscope itemtype="https://schema.org/ImageGallery" <?php post_class(); ?> >
+		<h1><span itemprop="about"><?php echo $procedures ?></span></h1>
 		
 
 		<?php foreach ( $patient_photos as $index => $value ) { ?>
 
 			<?php if ($index == 0) { ?> <!-- Show first set of photos -->
 			<section>
-			<h2><? the_title(); ?></h2>
+			<h2 itemprop="name"><? the_title(); ?></h2>
 			<div class="one-fourth first">
 				<div style="text-align:center;">Before</div>
-				<a href="<?php the_permalink() ?>"><img src="<?php echo $value['_pgsa_photos_before_photo']; ?>" alt="<?php echo the_title()." - Before"; ?>" title="<?php echo the_title()." - Before"; ?>"/></a>
+				<a itemprop="url" href="<?php the_permalink() ?>"><img itemprop="image" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" alt="<?php echo the_title()." - Before"; ?>" title="<?php echo the_title()." - Before"; ?>"/></a>
 			</div>
 			<div class="one-fourth">
 				<div style="text-align:center;">After</div>							
-				<a href="<?php the_permalink() ?>"><img src="<?php echo $value['_pgsa_photos_after_photo']; ?>" alt="<?php echo the_title()." - After"; ?>" title="<?php echo the_title()." - After"; ?>"/></a>
+				<a itemprop="url" href="<?php the_permalink() ?>"><img itemprop="image" src="<?php echo $value['_pgsa_photos_after_photo']; ?>" alt="<?php echo the_title()." - After"; ?>" title="<?php echo the_title()." - After"; ?>"/></a>
 			</div>
 			<?php }else if($index == 1){ ?> <!--Show second set of photos -->
 			<div class="one-fourth">
 				<div style="text-align:center;">Before</div>
-				<a href="<?php the_permalink() ?>"><img src="<?php echo $value['_pgsa_photos_before_photo']; ?>" alt="<?php echo the_title()." - Before"; ?>" title="<?php echo the_title()." - Before"; ?>"/></a>
+				<a itemprop="url" href="<?php the_permalink() ?>"><img itemprop="image" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" alt="<?php echo the_title()." - Before"; ?>" title="<?php echo the_title()." - Before"; ?>"/></a>
 			</div>
 			<div class="one-fourth">
 				<div style="text-align:center;">After</div>
-				<a href="<?php the_permalink() ?>"><img src="<?php echo $value['_pgsa_photos_after_photo']; ?>" alt="<?php echo the_title()." - After"; ?>" title="<?php echo the_title()." - After"; ?>"/></a>
+				<a itemprop="url" href="<?php the_permalink() ?>"><img itemprop="image" src="<?php echo $value['_pgsa_photos_after_photo']; ?>" alt="<?php echo the_title()." - After"; ?>" title="<?php echo the_title()." - After"; ?>"/></a>
 			</div>
 			</section>
 			<?php	} ?>

@@ -31,36 +31,38 @@ if ( $count > 0 ){
             )
         ));
 
+        ?>
+        <article itemscope itemtype="https://schema.org/ImageGallery" <?php post_class() ?>>
+        <h1>Photogallery</h1>
+        <?php
         // the loop
         while ($loop->have_posts()) : $loop->the_post();
         $patient_photos = get_post_meta( get_the_ID(), '_pgsa_photos_patient-photos', true );
+                $view   = get_post_meta( get_the_ID(), '_pgsa_photos_view_select', true );
+                $procedure = get_the_term_list( $post->ID, 'procedures', '', '' );
         ?>
-        <article <?php post_class() ?>>
-
-			<h2><?php echo get_the_term_list( $post->ID, 'procedures', '', '' ); ?></h2> 
-			
-
-
-
-		<?php foreach ( $patient_photos as $index => $value ) { ?>
-			<?php if ($index <= 1) { ?> <!-- Show only the first TWO set of photos -->
-			<div class="one-fourth">		 					
-				<a href="<?php the_permalink() ?>"><img src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
-			</div>
-			<div class="one-fourth">								
-				<a href="<?php the_permalink() ?>"><img src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a>
-			</div>
-			
-			<?php } ?>
-		<?php } ?>
-		</article>
-
-
+            <section>
+    			<h2 itemprop="name"><?php echo $procedure  ?></h2> 
+    					<?php foreach ( $patient_photos as $index => $value ) { ?>
+    			<?php if ($index <= 1) { ?> <!-- Show only the first TWO set of photos -->
+    			<div class="one-fourth">
+                    <div class="text-align:center;">Before</div>               
+    				<a itemprop="url" href="<?php the_permalink() ?>"><img itemprop="image" alt="<?php 'Before'; ?>" title="<?php 'Before';?>" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a>
+    			</div>
+    			<div class="one-fourth">
+                    <div class="text-align:center;">after</div>
+    				<a itemprop="url" href="<?php the_permalink() ?>"><img itemprop="image" alt="<?php 'After'; ?>" title="<?php 'After';?>" src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a>
+    			</div>
+    			
+    			<?php } ?>
+    		<?php } ?>
+            </section>
 		
-
-
 		<?php 
         endwhile;
+        ?>
+        </article>
+        <?php 
         // reset $post so that the rest of the template is in the original context
         wp_reset_postdata();
         ?>
