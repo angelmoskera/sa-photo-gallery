@@ -66,12 +66,13 @@ function pgsa_remove_slug_field() {
 add_action( 'admin_menu' , 'pgsa_remove_slug_field' );
 
 // Add Custom css to Admin Área
-function pgsa_custom_admin_css($hook) { 
+function pgsa_custom_admin_resources($hook) { 
 	if( get_post_type() == 'photo-gallery' ) {
 	    wp_enqueue_style( 'photo_gallery_styles', plugin_dir_url( __FILE__ ) . 'css/admin-styles.css' );
+       wp_enqueue_script( 'photo_gallery_js', plugin_dir_url( __FILE__ ) . 'js/scripts.js' );
 	}
 }
-add_action( 'admin_enqueue_scripts', 'pgsa_custom_admin_css' );
+add_action( 'admin_enqueue_scripts', 'pgsa_custom_admin_resources' );
 
 
 // Force use of template
