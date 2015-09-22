@@ -5,7 +5,25 @@ remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'pgsa_custom_archive_loop' );
 
 function pgsa_custom_archive_loop() { ?>
-    <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+<?php 
+$qobj = get_queried_object();
+$args = array(
+	'post_type'  => 'photo-gallery',
+	'orderby' => 'title',
+	'order'   => 'DESC',
+	'tax_query' => array(
+        array(
+          'taxonomy' => $qobj->taxonomy,
+          'field' => 'id',
+          'terms' => $qobj->term_id,
+        )
+      )
+);
+$pgsa_archive_query = new WP_Query( $args ); ?>
+    <?php 
+$value    = get_query_var($wp_query->query_vars['procedures']);
+echo get_term_by('slug',$value,$wp_query->query_vars['procedures']);
+    if ( $pgsa_archive_query->have_posts() ) : while ( $pgsa_archive_query->have_posts() ) : $pgsa_archive_query->the_post(); ?>
     <?php
     $patient_photos = get_post_meta( get_the_ID(), '_pgsa_photos_patient-photos', true );
 		    $age 	= get_post_meta( get_the_ID(), '_pgsa_info_age', true );
