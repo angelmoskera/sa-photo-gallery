@@ -33,8 +33,8 @@ function pgsa_create_posttype() {
 			'has_archive' 		=> true,
 			'menu_icon' 		=> 'dashicons-format-gallery',
 			'supports'   		=> array('title'),
-			'hierarchical'      => false,
-
+            'hierarchical' => true,
+            'cptp_permalink_structure' => "/%procedures%/case-%post_id%",
 		)
 	);
 
@@ -51,13 +51,48 @@ function pgsa_create_posttype() {
         'public'=>true,
         'has_archive' => true,
 		'show_ui' => true,
-
+        'rewrite' => array('slug' => 'photo-gallery')
 		)
 
 	);
 }
-
 add_action( 'init', 'pgsa_create_posttype' );
+
+
+
+// Remove custom taxonomy base slug in Permalinks
+function taxonomy_slug_rewrite($wp_rewrite) {
+    $rules = array();
+    // get all custom taxonomies
+    $taxonomies = get_taxonomies(array('_builtin' => false), 'objects');
+    // get all custom post types
+    $post_types = get_post_types(array('public' => true, '_builtin' => false), 'objects');
+     
+    foreach ($post_types as $post_type) {
+        foreach ($taxonomies as $taxonomy) {
+         
+            // go through all post types which this taxonomy is assigned to
+            foreach ($taxonomy->object_type as $object_type) {
+                 
+                // check if taxonomy is registered for this custom type
+                if ($object_type == $post_type->rewrite['slug']) {
+             
+                    // get category objects
+                    $terms = get_categories(array('type' => $object_type, 'taxonomy' => $taxonomy->name, 'hide_empty' => 0));
+             
+                    // make rules
+                    foreach ($terms as $term) {
+                        $rules[$object_type . '/' . $term->slug . '/?$'] = 'index.php?' . $term->taxonomy . '=' . $term->slug;
+                    }
+                }
+            }
+        }
+    }
+    // merge with global rules
+    $wp_rewrite->rules = $rules + $wp_rewrite->rules;
+}
+add_filter('generate_rewrite_rules', 'taxonomy_slug_rewrite');
+
 
 //Remove post slug box
 function pgsa_remove_slug_field() {
