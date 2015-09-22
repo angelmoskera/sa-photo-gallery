@@ -37,9 +37,9 @@ function pgsa_custom_single_loop() { ?>
 
 	<article itemscope itemtype="http://schema.org/MedicalProcedure" <?php post_class() ?> >
 		<h1><span itemprop="name"><?php echo $procedures ?></span>	<?php the_title(); ?></h1>
-		<section class="pgsa-surgeon-info">
-			<h3>Surgeon: <span><?php echo esc_html( $doctor ); ?> M.D., F.A.C.S.</span></h3>
-			<h3>Location: <span><?php echo esc_html( $location ); ?></span></h3>
+		<section itemscope itemtype="http://schema.org/Physician" class="pgsa-surgeon-info">
+			<h3>Surgeon: <span  itemprop="name"><?php echo esc_html( $doctor ); ?> </span></h3>
+			<h3>Location: <span itemprop="address"><?php echo esc_html( $location ); ?></span></h3>
 		</section>
 		<section itemscope itemtype="http://schema.org/Person" class="pgsa-patient-info">
  			<div class="one-third first">
@@ -67,11 +67,11 @@ function pgsa_custom_single_loop() { ?>
 			<div itemscope itemtype="https://schema.org/ImageGallery">
 				<h3 itemprop="name"><?php echo $value['_pgsa_photos_view_select']; ?></h3>
 				<div class="one-half first">							
-					<div class="pgsa-photo"><a href="<?php echo $value['_pgsa_photos_before_photo']; ?>" data-lity><img itemprop="image" class="imageresource" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a></div>
+					<div class="pgsa-photo"><a href="<?php echo $value['_pgsa_photos_before_photo']; ?>" data-lity><img alt="<?php echo the_title()." - ".$value['_pgsa_photos_view_select']." Before"?>" title="<?php echo the_title()." - ".$value['_pgsa_photos_view_select']." Before"?>" itemprop="image" class="imageresource" src="<?php echo $value['_pgsa_photos_before_photo']; ?>" /></a></div>
 					<p class="pgsa-photo-caption"><span class="pgsa-photo-caption-before">Before</span><?php if (!empty($value['_pgsa_photos_before_caption'])) { ?>: <?php echo $value['_pgsa_photos_before_caption']; ?><?php } ?></p>
 				</div>
 				<div class="one-half">
-					<div class="pgsa-photo"><a href="<?php echo $value['_pgsa_photos_after_photo']; ?>" data-lity><img itemprop="image"  class="imageresource" src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a></div>
+					<div class="pgsa-photo"><a href="<?php echo $value['_pgsa_photos_after_photo']; ?>" data-lity><img alt="<?php echo the_title()." - ".$value['_pgsa_photos_view_select']." After"?>" title="<?php echo the_title()." - ".$value['_pgsa_photos_view_select']." After"?>" itemprop="image"  class="imageresource" src="<?php echo $value['_pgsa_photos_after_photo']; ?>" /></a></div>
 					<p class="pgsa-photo-caption"><span class="pgsa-photo-caption pgsa-photo-caption-after">After</span><?php if (!empty($value['_pgsa_photos_after_photo'])) { ?> <?php echo $value['_pgsa_photos_after_caption']; ?><?php } ?></p>
 				</div>
 			</div>
